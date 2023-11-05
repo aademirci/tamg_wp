@@ -1,0 +1,19 @@
+@use 'component/styles/NavBar';
+@use 'component/styles/AnecdoteNav';
+@use 'component/styles/Anecdote';
+
+body { overflow: hidden; font-family: "Tahoma", sans-serif; background: #D9A74A; }
+h1, h2, h3, h4, h5, h6 { font-weight: normal; font-size: 1em; }
+a { text-decoration: none; color: unset; }
+
+button {
+    /* Reset */
+    appearance: none; border: 0; outline: 0; font: inherit;
+    /* Personalise */
+    width: auto; 
+    background: #363430; color: white; border-radius: 0;
+    transition: 1s; cursor: pointer;
+    &:hover { background: #4F4D48; }
+}
+
+.loading { width: 100vw; height: 100vh; background-color: rgba($color: #000000, $alpha: .8); color: white; position: absolute; top: 0; left: 0; line-height: 100vh; text-align: center; z-index: 9999;}
