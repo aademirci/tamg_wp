@@ -14,7 +14,7 @@ const Anecdote: React.FC<{anecdote: IAnecdote}> = ({ anecdote }) => {
     const [media, setMedia] = useState<IMedia[]>([])
 
     useEffect(() => {
-		agent.Anecdotes.getAttached(anecdote.id).then((data) => setMedia(data.reverse()))
+		agent.Media.getAttached(anecdote.id).then((data) => setMedia(data.reverse()))
     }, [anecdote])
 
     return (
@@ -33,7 +33,7 @@ const Anecdote: React.FC<{anecdote: IAnecdote}> = ({ anecdote }) => {
                             <span>
                                 {anecdote['olaydaki_olay-tipleri'].map((type, index) => {
                                     return (
-                                        <Link key={type.term_id} to={`/olay-tipi/${type.slug}`}>
+                                        <Link key={type.slug} to={`/olay-tipi/${type.slug}`}>
                                             {(index ? ', ' : '')}
                                             {type.name}
                                         </Link>
@@ -81,10 +81,10 @@ const Anecdote: React.FC<{anecdote: IAnecdote}> = ({ anecdote }) => {
                 <div className="witnesses">
                     <h6>Oradaydılar:</h6>
                     {anecdote?.olaydaki_gruplar && anecdote?.olaydaki_gruplar.map(band => (
-                        <Link key={band.term_id} to={`/grup/${band.slug}`} rel="tag">{band.name}</Link>
+                        <Link key={band.slug} to={`/grup/${band.slug}`} rel="tag">{band.name}</Link>
                     ))}
                     {anecdote?.olaydaki_kisiler && anecdote?.olaydaki_kisiler.map(person => (
-                        <Link key={person.term_id} to={`/kisi/${person.slug}`} rel="tag">{person.name}</Link>
+                        <Link key={person.slug} to={`/kisi/${person.slug}`} rel="tag">{person.name}</Link>
                     ))}
                 </div>
             </div>

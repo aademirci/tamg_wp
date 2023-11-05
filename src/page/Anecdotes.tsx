@@ -15,6 +15,7 @@ import { useInfinite } from "../hooks/useInfinite"
 const Anecdotes: React.FC = () => {
 	const [order, setOrder] = useState('desc')
 	const [year, setYear] = useState(1)
+	const [end, setEnd] = useState(false)
 	const dispatch = useDispatch()
 	const location = useLocation();
 	const newLocation = useRef<string | undefined>("")
@@ -32,17 +33,17 @@ const Anecdotes: React.FC = () => {
 					dispatch(startLoading())
 					agent.Anecdotes.listByYear(page, year, order).then((data) => dispatch(loadAnecdotes(data)))
 				}
+				if (page >= maxPages) setEnd(true)
 			})
 		}
 
 		if (location.pathname === newLocation.current) {
-            console.log('ora')
             setup()
         } else {
             newLocation.current = location.pathname
 			dispatch(resetAnecdotes())
             dispatch(setPage(1))
-            console.log('bura')
+			setEnd(false)
             if ( page === 1 ) setup()
         }
 			
@@ -65,9 +66,11 @@ const Anecdotes: React.FC = () => {
 				{anecdotes.map(anecdote => (
 					<Anecdote key={anecdote.id} anecdote={anecdote} />
 				))}
+				{end &&
 				<AnecdoteInfo id="anecdote-end">
 					<p>Bu sıra bitti.</p>
 				</AnecdoteInfo>
+                }
 			</ScrollContainer>
 		</Fragment>
 	)

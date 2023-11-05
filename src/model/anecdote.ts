@@ -27,7 +27,7 @@ export interface IAnecdote {
     acf: {
       avatar: number
       "kurulus-yili": number
-      "dogum-tarihi": number
+      "dogum-tarihi": string
       "yabanci-mi": boolean
       ulke: string
     }

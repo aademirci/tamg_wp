@@ -10,6 +10,11 @@ import AnecdoteInfo from "../component/AnecdoteInfo"
 import Anecdote from "../component/Anecdote"
 import { setPerson } from "../state/anecdote/taxonomySlice"
 import { useInfinite } from "../hooks/useInfinite"
+import { format } from "date-fns"
+import { tr } from "date-fns/locale"
+import { useDate } from "../hooks/useDate"
+import parse from "html-react-parser"
+import { IMedia } from "../model/media"
 
 type IParams = {
     slug: string
@@ -17,16 +22,17 @@ type IParams = {
 
 const Person: React.FC = () => {
     const [end, setEnd] = useState(false)
+    const [avatar, setAvatar] = useState<IMedia>()
     const { slug } = useParams<IParams>()
     const dispatch = useDispatch()
     const newSlug = useRef<string | undefined>("")
+    const birthDay = useDate()
     const { anecdotes, loading, page } = useSelector((state:RootState) => state.anecdote)
     const { person } = useSelector((state:RootState) => state.taxonomy)
     const infiniteScroll = useInfinite()
 
     useEffect(() => {
         const setup = () => {
-            console.log(page)
             agent.Taxonomies.findPerson(slug!).then((data) => {
                 dispatch(setPerson(data[0]))
                 agent.AnecdotesHeaders.listByPerson(data[0].id).then((headerData) => {
@@ -41,17 +47,26 @@ const Person: React.FC = () => {
         }
         
         if (slug === newSlug.current) {
-            console.log('ora')
             setup()
         } else {
             newSlug.current = slug
             dispatch(resetAnecdotes())
             dispatch(setPage(1))
-            console.log('bura')
+            setEnd(false)
             if ( page === 1 ) setup()
         }
         
     }, [page, slug, dispatch])
+
+    useEffect(() => {
+        if (person?.acf.avatar) agent.Media.getMedia(person.acf.avatar).then((data) => setAvatar(data))
+        else setAvatar(undefined)
+
+        return () => {
+            setAvatar(undefined)
+        }
+    }, [person])
+
 
     return (
         <Fragment>
@@ -59,11 +74,15 @@ const Person: React.FC = () => {
 			<AnecdoteNav />
 			<ScrollContainer className="main-section scroll-container" onEndScroll={infiniteScroll} component={'section'} ignoreElements=".tamgModal">
 				<div id="person" className="anecdote">
-                    <div className="main-image"></div>
+                   {avatar &&
+                    <div className="main-image">
+                        <img src={avatar?.media_details.sizes.medium.source_url} />
+                    </div>
+                    }
                     <div className="content">
                         <h1>{person?.name}</h1>
-                        {person?.acf["dogum-tarihi"] && <p>Doğum tarihi: {person.acf["dogum-tarihi"]}</p>}
-                        <p>{person?.description}</p>
+                        {person?.acf["dogum-tarihi"] && <p>Doğum tarihi: {format(new Date(birthDay), 'd MMMM yyyy', {locale: tr})}</p>}
+                        <p>{person?.description && parse(person?.description)}</p>
                     </div>
                 </div>
 				{anecdotes.map(anecdote => (

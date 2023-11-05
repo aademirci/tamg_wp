@@ -21,7 +21,6 @@ const Anecdotes = {
     listByBand: (id: number, page: number): Promise<IAnecdote[]> => requests.get(`/olay?gruplar=${id}&page=${page}`),
     listByPerson: (id: number, page: number): Promise<IAnecdote[]> => requests.get(`/olay?kisiler=${id}&page=${page}`),
     selected: (slug: string) => requests.get(`/olay?slug=${slug}`),
-    getAttached: (id: number): Promise<IMedia[]> => requests.get(`/media?parent=${id}&per_page=100`),
     getYears: (): Promise<IYears[]> => requests.get('/olay/archives')
 }
 
@@ -34,6 +33,11 @@ const AnecdotesHeaders = {
     listByPerson: (id: number) => requests.getHeaders(`/olay?kisiler=${id}`)
 }
 
+const Media = {
+    getAttached: (id: number): Promise<IMedia[]> => requests.get(`/media?parent=${id}&per_page=100`),
+    getMedia: (id: number): Promise<IMedia | undefined> => requests.get(`/media/${id}`)
+}
+
 const Taxonomies = {
     listBands: (): Promise<ITaxonomy[]> => requests.get('gruplar?order=desc&orderby=count&per_page=20'),
     listPersons: (): Promise<ITaxonomy[]> => requests.get('kisiler?order=desc&orderby=count&per_page=20'),
@@ -41,4 +45,4 @@ const Taxonomies = {
     findPerson: (slug: string): Promise<ITaxonomy[]> => requests.get(`kisiler?slug=${slug}`)
 }
 
-export default { Anecdotes, AnecdotesHeaders, Taxonomies }
+export default { Anecdotes, AnecdotesHeaders, Media, Taxonomies }

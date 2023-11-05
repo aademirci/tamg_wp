@@ -4,7 +4,7 @@ body.modal-open .main-section { overflow: hidden; }
 .anecdote { width: 100%; height: calc(100vh - 135px); background: #F2EEDD; border: 1px solid #C19144; overflow-y: auto; display: inline-block; margin-right: 20px; white-space: normal; vertical-align: top; box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.2); 
     .flexcontainer { display: flex; flex-direction: column; height: 100%; margin: 0; }
 }
-.anecdote.info { border: dashed 5px #C19144; box-shadow: none; background: transparent;
+.anecdote.info { border: dashed 5px #C19144; height: calc(100vh - 142px); box-shadow: none; background: transparent;
 	p { padding: 20px; text-align: center; font-size: 32px; color: #AF843F; }
 }
 .single .anecdote { height: calc(100vh - 90px); }
@@ -18,6 +18,12 @@ body.modal-open .main-section { overflow: hidden; }
 		}
 	}
 	img+.meta { position: absolute; top: 20px; left: 20px; padding: 0;}
+}
+#band, #person { background: #363430; 
+	.content { color: #F2EEDD; }
+	h1 { font-family: "gill-sans-nova"; margin: 0 0 10px 0; font-size: 24px; line-height: 1; }
+	img { width: 100%; height: auto; }
+	h1 + p { font-size: 16px; margin-bottom: 20px; }
 }
 
 .content { padding: 20px;
