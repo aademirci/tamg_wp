@@ -42,9 +42,6 @@ const SingleAnecdote: React.FC = () => {
 		}
 	}, [anecdote])
 
-	console.log(anecdote?.next_five)
-	console.log(anecdote?.id)
-
   return (
     <Fragment>
 		<ScrollContainer className="main-section scroll-container" component={'section'} ignoreElements=".tamgModal">
