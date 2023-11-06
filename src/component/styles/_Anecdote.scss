@@ -7,7 +7,9 @@ body.modal-open .main-section { overflow: hidden; }
 .anecdote.info { border: dashed 5px #C19144; height: calc(100vh - 142px); box-shadow: none; background: transparent;
 	p { padding: 20px; text-align: center; font-size: 32px; color: #AF843F; }
 }
-.single .anecdote { height: calc(100vh - 90px); }
+.single .anecdote { height: calc(100vh - 90px); 
+	&.info { height: calc(100vh - 100px); }
+}
 
 .main-image { position: relative;
 	img { width: 100%; height: auto; cursor: pointer; }

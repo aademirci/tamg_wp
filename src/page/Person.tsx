@@ -59,6 +59,7 @@ const Person: React.FC = () => {
     }, [page, slug, dispatch])
 
     useEffect(() => {
+        if (person) document.title = person.name + " - Türkiye'de Ağır Müziğin Geçmişi"
         if (person?.acf.avatar) agent.Media.getMedia(person.acf.avatar).then((data) => setAvatar(data))
         else setAvatar(undefined)
 

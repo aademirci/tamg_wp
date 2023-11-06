@@ -4,6 +4,7 @@ import agent from '../api/agent'
 import ScrollContainer from 'react-indiana-drag-scroll'
 import { IAnecdote } from '../model/anecdote'
 import Anecdote from '../component/Anecdote'
+import AnecdoteInfo from '../component/AnecdoteInfo'
 
 type IParams = {
   slug: string
@@ -12,6 +13,7 @@ type IParams = {
 const SingleAnecdote: React.FC = () => {
 	const { slug } = useParams<IParams>()
 	const [anecdote, setAnecdote] = useState<IAnecdote>()
+	const [anecdotes, setAnecdotes] = useState<IAnecdote[]>()
 
 	useEffect(() => {
 		document.body.classList.add('single')
@@ -22,10 +24,34 @@ const SingleAnecdote: React.FC = () => {
 		}
 	}, [setAnecdote, slug])
 
+	useEffect(() => {
+		const loadNextFive = async (slugs: string[]) => {
+			let nextFive: IAnecdote[] = []
+
+			for (const slug of slugs) {
+				const nextAnecdote = await agent.Anecdotes.selected(slug)
+				nextFive = [...nextFive, nextAnecdote[0]]
+			}
+
+			return nextFive
+		}
+
+		if (anecdote) {
+			document.title = anecdote.title.rendered + " - Türkiye'de Ağır Müziğin Geçmişi"
+			loadNextFive(anecdote.next_five).then((data) => setAnecdotes(data))
+		}
+	}, [anecdote])
+
+	console.log(anecdote?.next_five)
+	console.log(anecdote?.id)
+
   return (
     <Fragment>
 		<ScrollContainer className="main-section scroll-container" component={'section'} ignoreElements=".tamgModal">
 			{anecdote && <Anecdote anecdote={anecdote} />}
+			{anecdote && anecdote.next_five.length ? <AnecdoteInfo id="anecdote-start"><p>Sonraki 5'li</p></AnecdoteInfo> : <Fragment />}
+			{anecdotes && anecdotes.map((anecdote) => <Anecdote key={anecdote.slug} anecdote={anecdote} />)}
+			{anecdotes && anecdotes.length ? <AnecdoteInfo id="anecdote-end"><p>Bu sıra bitti.</p></AnecdoteInfo> : <Fragment />}
 		</ScrollContainer>
 	</Fragment>
   )

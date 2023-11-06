@@ -55,6 +55,7 @@ const Band: React.FC = () => {
     }, [page, slug, dispatch])
 
     useEffect(() => {
+        if (band) document.title = band.name + " - Türkiye'de Ağır Müziğin Geçmişi"
         if (band?.acf.avatar) agent.Media.getMedia(band.acf.avatar).then((data) => setAvatar(data))
         else setAvatar(undefined)
 

@@ -23,7 +23,7 @@ const Anecdotes: React.FC = () => {
 	const infiniteScroll = useInfinite()
 
 	useEffect(() => {
-		document.title = 'Olaylar'
+		document.title = "Olaylar - Türkiye'de Ağır Müziğin Geçmişi"
 		document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#363430')
 
 		const setup = () => {
