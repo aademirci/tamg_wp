@@ -8,13 +8,12 @@ import AnecdoteNav from "../component/AnecdoteNav"
 import ScrollContainer from "react-indiana-drag-scroll"
 import AnecdoteInfo from "../component/AnecdoteInfo"
 import Anecdote from "../component/Anecdote"
-import { setPerson } from "../state/anecdote/taxonomySlice"
+import { resetPerson, setAvatar, setPerson } from "../state/anecdote/taxonomySlice"
 import { useInfinite } from "../hooks/useInfinite"
 import { format } from "date-fns"
 import { tr } from "date-fns/locale"
 import { useDate } from "../hooks/useDate"
 import parse from "html-react-parser"
-import { IMedia } from "../model/media"
 
 type IParams = {
     slug: string
@@ -22,13 +21,12 @@ type IParams = {
 
 const Person: React.FC = () => {
     const [end, setEnd] = useState(false)
-    const [avatar, setAvatar] = useState<IMedia>()
     const { slug } = useParams<IParams>()
     const dispatch = useDispatch()
     const newSlug = useRef<string | undefined>("")
     const birthDay = useDate()
     const { anecdotes, loading, page } = useSelector((state:RootState) => state.anecdote)
-    const { person } = useSelector((state:RootState) => state.taxonomy)
+    const { person, avatar } = useSelector((state:RootState) => state.taxonomy)
     const infiniteScroll = useInfinite()
 
     useEffect(() => {
@@ -46,6 +44,7 @@ const Person: React.FC = () => {
             })
         }
         
+
         if (slug === newSlug.current) {
             setup()
         } else {
@@ -55,18 +54,19 @@ const Person: React.FC = () => {
             setEnd(false)
             if ( page === 1 ) setup()
         }
+
+        return () => {
+            dispatch(resetPerson())
+        }
         
     }, [page, slug, dispatch])
 
     useEffect(() => {
-        if (person) document.title = person.name + " - Türkiye'de Ağır Müziğin Geçmişi"
-        if (person?.acf.avatar) agent.Media.getMedia(person.acf.avatar).then((data) => setAvatar(data))
-        else setAvatar(undefined)
-
-        return () => {
-            setAvatar(undefined)
+        if (person) {
+            document.title = person.name + " - Türkiye'de Ağır Müziğin Geçmişi"
+            if (person.acf.avatar) agent.Media.getMedia(person.acf.avatar).then((data) => dispatch(setAvatar(data!)))
         }
-    }, [person])
+    }, [person, dispatch])
 
 
     return (
@@ -82,7 +82,7 @@ const Person: React.FC = () => {
                     }
                     <div className="content">
                         <h1>{person?.name}</h1>
-                        {person?.acf["dogum-tarihi"] && <p>Doğum tarihi: {format(new Date(birthDay), 'd MMMM yyyy', {locale: tr})}</p>}
+                        {person?.acf["dogum-tarihi"] && <p className="date">Doğum tarihi: {format(new Date(birthDay), 'd MMMM yyyy', {locale: tr})}</p>}
                         <p>{person?.description && parse(person?.description)}</p>
                     </div>
                 </div>

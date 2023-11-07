@@ -14,7 +14,7 @@ const NavBar = () => {
 	useEffect(() => {
 		agent.Taxonomies.listBands().then(data => setBands(data))
 		agent.Taxonomies.listPersons().then(data => setPersons(data))
-	})
+	}, [])
 
 	return (
 		<header>
