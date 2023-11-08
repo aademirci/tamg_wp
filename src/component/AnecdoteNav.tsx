@@ -20,10 +20,19 @@ const AnecdoteNav: React.FC<IProps> = ({ callback, year, setYear, order, setOrde
     }, [setYears])
 
     const scrollTo = (direction: string, end?: boolean ) => {
-        const anecdoteWidth = window.innerWidth
+        const anecdoteWidth = document.getElementsByClassName('anecdote')[0].clientWidth + 22
+        
+        const slide = Math.floor(window.innerWidth / anecdoteWidth)
+        
+        const leftSide = Math.floor(document.getElementsByClassName('main-section')[0].scrollLeft / anecdoteWidth)
+        const rightSide = Math.ceil(document.getElementsByClassName('main-section')[0].scrollLeft / anecdoteWidth)
+
+        const next = (leftSide + slide) * anecdoteWidth
+        const prev = (rightSide - slide) * anecdoteWidth
+               
         if (direction === 'left' && end) document.getElementsByClassName('main-section')[0].scrollTo({left: 0, behavior: 'smooth'})
-        if (direction === 'left' && !end) document.getElementsByClassName('main-section')[0].scrollBy({left: -anecdoteWidth, behavior: 'smooth'})
-        if (direction === 'right' && !end) document.getElementsByClassName('main-section')[0].scrollBy({left: anecdoteWidth, behavior: 'smooth'})
+        if (direction === 'left' && !end) document.getElementsByClassName('main-section')[0].scrollTo({left: prev, behavior: 'smooth'})
+        if (direction === 'right' && !end) document.getElementsByClassName('main-section')[0].scrollTo({left: next, behavior: 'smooth'})
     }
 
     const handleToggle = () => {
