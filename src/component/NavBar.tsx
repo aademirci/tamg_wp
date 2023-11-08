@@ -16,42 +16,52 @@ const NavBar = () => {
 		agent.Taxonomies.listPersons().then(data => setPersons(data))
 	}, [])
 
+	const sizeByCount = (count: number, isBand: boolean) => {
+		const counts = isBand ? bands.map(band => band.count) : persons.map(person => person.count)
+		const max = Math.max(...counts)
+
+		const size = 24 * (count / max) > 12 ? 24 * (count / max) : 12
+
+		return size
+	}
+
 	return (
 		<header>
 			<nav className="main-menu">
-				<div className="menu-toggle">
-					<FontAwesomeIcon icon={faBars} />
-				</div>
 				<Link to={'/'} className="logo" rel="home">
 					<img src="https://turkiyedeagirmuzigingecmisi.com/wp-content/uploads/2019/02/cropped-tamg-logo2x.png" alt="Türkiye'de Ağır Müziğin Geçmişi" className="custom-logo" />
 				</Link>
-				<ul>
-					<li><Link to={'#'}>Hakkında</Link></li>
-					{location.pathname === '/olay' ? 
-					<Fragment></Fragment> : <li><Link to={'/olay'}>Tüm Olaylar</Link></li>}
-					<li className="band-toggle">Gruplar
-						<div className="band-list">
-							<ul>
-								{bands.map(band => (
-									<li key={band.slug}>
-										<Link to={`/grup/${band.slug}`}>{band.name} ({band.count})</Link>
-									</li>
-								))}
-							</ul>
-						</div>
-					</li>
-					<li className="person-toggle">Kişiler
-						<div className="person-list">
-							<ul>
-								{persons.map(person => (
-									<li key={person.slug}>
-										<Link to={`/kisi/${person.slug}`}>{person.name} ({person.count})</Link>
-									</li>
-								))}
-							</ul>
-						</div>
-					</li>
-				</ul>
+				<div className="menu-toggle">
+					<FontAwesomeIcon icon={faBars} />
+				
+					<ul id="nav-menu">
+						<li><Link to={'#'}>Hakkında</Link></li>
+						{location.pathname === '/olay' ? 
+						<Fragment></Fragment> : <li><Link to={'/olay'}>Tüm Olaylar</Link></li>}
+						<li className="band-toggle">Gruplar
+							<div className="band-list">
+								<ul>
+									{bands.sort((a,b) => a.name.charCodeAt(0) - b.name.charCodeAt(0)).map(band => (
+										<li key={band.slug} style={{fontSize: `${sizeByCount(band.count, true)}px`}}>
+											<Link to={`/grup/${band.slug}`}>{band.name} ({band.count})</Link>
+										</li>
+									))}
+								</ul>
+							</div>
+						</li>
+						<li className="person-toggle">Kişiler
+							<div className="person-list">
+								<ul>
+									{persons.sort((a,b) => a.name.charCodeAt(0) - b.name.charCodeAt(0)).map(person => (
+										<li key={person.slug} style={{fontSize: `${sizeByCount(person.count, false)}px`}}>
+											<Link to={`/kisi/${person.slug}`}>{person.name} ({person.count})</Link>
+										</li>
+									))}
+								</ul>
+							</div>
+						</li>
+					</ul>
+				</div>
 			</nav>
 			<div className="search-toggle">
 				<FontAwesomeIcon icon={faSearch} />

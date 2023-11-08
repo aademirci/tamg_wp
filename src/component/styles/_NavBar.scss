@@ -1,33 +1,45 @@
 header { background: #363430; color: #F2EEDD; height: 50px; display: flex; justify-content: space-between; position: relative; margin-bottom: 10px; z-index: 100;
 	.main-menu { display: flex; 
-		ul { margin: 0; padding-left: 20px; font-family: 'gill-sans-nova';
-			li { list-style: none; display: inline-block; height: 50px; line-height: 50px; background-color: #363430; transition: .2s; padding: 0 15px;
-				a { display: inline-block; height: 100%; }
-				&:hover { background-color: #4F4D48; }
+		#nav-menu { margin: 0; font-family: 'gill-sans-nova'; background-color: #363430; transition: .2s; position: absolute; top: 50px; left: -540px; width: 80%; max-height: calc(100vh - 90px); padding: 20px 36px; overflow-y: auto;
+			li { list-style: none; font-size: 24px; line-height: 1.5; }
+			.band-toggle, .person-toggle { position: relative;
+				ul { width: calc(100% - 80px); margin-bottom: 20px;
+					li { display: inline-block; padding-right: 18px; }
+				}
 			}
-		 }
+		}
 	}
 	.menu-toggle, .search-toggle { font-size: 24px; padding: 10px; cursor: pointer; }
 	.menu-nav { background: #363430; width: 90%; height: calc(100vh - 50px); position: fixed; left: -100%; top:50px; transition: .2s; z-index: 99; padding: 40px; overflow-y: auto; }
 	.logo img { height: 50px; width: auto; }
-	.search-form { padding: 10px; font-size: 10px; position: absolute; top: -50px; right: 38px; width: calc(100% - 68px); transition: .2s;
+	.search-form { padding: 10px; font-size: 10px; position: absolute; top: -50px; right: 38px; width: calc(100% - 60px); transition: .2s;
 		input[type=text] { width: 100%; height: 30px; padding: 0 0 0 10px; border: none;
 			&:focus { outline: none; }
 		} 
 		button { position: absolute; top: 10px; right: 0; height: 30px; cursor: pointer; }
 	}
-	.band-toggle, .person-toggle { cursor: pointer; position: relative;
-		ul { overflow: hidden; height: 0; opacity: 0; position: absolute; transition: .2s; width: 100%; padding: 0; left: 0; }
-		&:hover ul { height: auto; opacity: 1; }
-	}
 }
 .single header { margin-bottom: 0; }
-.menu-toggle:hover .menu-nav { left: 0; box-shadow: 3px 0px 150px 0px rgba(0, 0, 0, 0.4); }
+.menu-toggle:hover #nav-menu { left: 0; }
 .search-toggle:hover .search-form { top: 0; }
 
-@media screen and (min-width: 480px){
-	.menu-toggle { display: none; }
-    header .search-form { width: 200px; }
-	header .band-toggle ul { width: 480px; }
-	header .person-toggle ul { width: 480px; }
+@media screen and (min-width: 560px) {
+	.menu-toggle svg { display: none;}
+	header .main-menu { 
+		#nav-menu { padding-left: 0px; position: relative; top: -10px; left: 0; width: auto; padding: 0; overflow: visible;
+			li { display: inline-block; height: 50px; font-size: 16px; line-height: 50px; transition: .2s; padding: 0 15px;
+				a { display: inline-block; height: 100%; }
+				&:hover { background-color: #4F4D48; }
+			}
+			.band-toggle, .person-toggle { cursor: pointer;
+				ul { overflow: hidden; height: 0; opacity: 0; position: absolute; transition: .2s; width: 480px; padding: 0; left: 0; background: #363430; 
+					li { line-height: 1; height: auto; padding: 0;
+						a { padding: 12px; }
+					}
+				}
+				&:hover ul { height: auto; opacity: 1; }
+			}
+		}
+		.search-form { width: 200px; }
+	} 
 }
