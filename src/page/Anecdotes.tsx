@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons"
 import { useLocation } from "react-router-dom"
 import { useInfinite } from "../hooks/useInfinite"
+import Loading from "../component/Loading"
 
 const Anecdotes: React.FC = () => {
 	const [order, setOrder] = useState('desc')
@@ -56,7 +57,7 @@ const Anecdotes: React.FC = () => {
 
 	return (
 		<Fragment>
-			{loading && <div className="loading">Hmmmm</div>}
+			{loading && <Loading />}
 			<AnecdoteNav callback={callback} order={order} setOrder={setOrder} year={year} setYear={setYear} />
 			<ScrollContainer className="main-section scroll-container" onEndScroll={infiniteScroll} component={'section'} ignoreElements=".tamgModal">
 				<AnecdoteInfo id="anecdote-start">

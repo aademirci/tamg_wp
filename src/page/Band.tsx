@@ -11,6 +11,7 @@ import Anecdote from "../component/Anecdote"
 import { resetBand, setAvatar, setBand } from "../state/anecdote/taxonomySlice"
 import { useInfinite } from "../hooks/useInfinite"
 import parse from "html-react-parser"
+import Loading from "../component/Loading"
 
 type IParams = {
     slug: string
@@ -65,7 +66,7 @@ const Band: React.FC = () => {
 
     return (
         <Fragment>
-			{loading && <div className="loading">Hmmmm</div>}
+			{loading && <Loading />}
 			<AnecdoteNav />
 			<ScrollContainer className="main-section scroll-container" onEndScroll={infiniteScroll} component={'section'} ignoreElements=".tamgModal">
                 <div id="band" className="anecdote">

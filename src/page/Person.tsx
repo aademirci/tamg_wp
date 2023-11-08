@@ -14,6 +14,7 @@ import { format } from "date-fns"
 import { tr } from "date-fns/locale"
 import { useDate } from "../hooks/useDate"
 import parse from "html-react-parser"
+import Loading from "../component/Loading"
 
 type IParams = {
     slug: string
@@ -71,7 +72,7 @@ const Person: React.FC = () => {
 
     return (
         <Fragment>
-			{loading && <div className="loading">Hmmmm</div>}
+			{loading && <Loading />}
 			<AnecdoteNav />
 			<ScrollContainer className="main-section scroll-container" onEndScroll={infiniteScroll} component={'section'} ignoreElements=".tamgModal">
 				<div id="person" className="anecdote">
