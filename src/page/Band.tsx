@@ -78,6 +78,7 @@ const Band: React.FC = () => {
                     <div className="content">
                         <h1>{band?.name}</h1>
                         {band?.acf["kurulus-yili"] && <p className="date">Kuruluş yılı: {band.acf["kurulus-yili"]}</p>}
+                        {band?.acf["yabanci-mi"] && <p className="country">Ülke: {band.acf.ulke}</p>}
                         <p>{band?.description && parse(band?.description)}</p>
                     </div>
                 </div>
