@@ -12,9 +12,11 @@ import Attachment from "./Attachment"
 
 const Anecdote: React.FC<{anecdote: IAnecdote}> = ({ anecdote }) => {
     const [media, setMedia] = useState<IMedia[]>([])
+    const [commentsLength, setCommentsLength] = useState(0)
 
     useEffect(() => {
 		agent.Media.getAttached(anecdote.id).then((data) => setMedia(data.reverse()))
+        agent.Comments.list(anecdote.id).then(data => setCommentsLength(data.length))
     }, [anecdote])
 
     return (
@@ -65,7 +67,7 @@ const Anecdote: React.FC<{anecdote: IAnecdote}> = ({ anecdote }) => {
                         
                         <div className="comment-count">
                             <FontAwesomeIcon icon={faComments} />
-                            <Link to={`/olay/${anecdote?.slug}`}>1 Yorum</Link>
+                            <Link to={`/olay/${anecdote?.slug}`}>{commentsLength} Yorum</Link>
                         </div>
                     </div>
                     {parse(anecdote!.content.rendered)}
