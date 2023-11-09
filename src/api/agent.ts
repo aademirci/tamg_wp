@@ -23,6 +23,7 @@ const Anecdotes = {
     listByPerson: (id: number, page: number): Promise<IAnecdote[]> => requests.get(`/olay?kisiler=${id}&page=${page}`),
     listByMedium: (id: number, page: number): Promise<IAnecdote[]> => requests.get(`/olay?ortamlar=${id}&page=${page}`),
     listByCity: (id: number, page: number): Promise<IAnecdote[]> => requests.get(`/olay?sehirler=${id}&page=${page}`),
+    search: (search: string, page: number): Promise<IAnecdote[]> => requests.get(`/olay?search=${search}&page=${page}`),
     selected: (slug: string) => requests.get(`/olay?slug=${slug}`),
     getYears: (): Promise<IYears[]> => requests.get('/olay/archives')
 }
@@ -35,7 +36,8 @@ const AnecdotesHeaders = {
     listByBand: (id: number) => requests.getHeaders(`/olay?gruplar=${id}`),
     listByPerson: (id: number) => requests.getHeaders(`/olay?kisiler=${id}`),
     listByMedium: (id: number) => requests.getHeaders(`/olay?ortamlar=${id}`),
-    listByCity: (id: number) => requests.getHeaders(`/olay?sehirler=${id}`)
+    listByCity: (id: number) => requests.getHeaders(`/olay?sehirler=${id}`),
+    search: (search: string) => requests.getHeaders(`/olay?search=${search}`)
 }
 
 const Media = {

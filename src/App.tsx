@@ -10,6 +10,7 @@ import './style.scss'
 import Person from './page/Person'
 import Medium from './page/Medium'
 import City from './page/City'
+import Search from './page/Search'
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
         <Route path='/kisi/:slug' element={<Person />} />
         <Route path='/ortam/:slug' element={<Medium />} />
         <Route path='/sehir/:slug' element={<City />} />
+        <Route path='/search/:search' element={<Search />} />
       </Route>
     </Routes>
   )

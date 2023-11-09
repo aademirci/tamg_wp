@@ -1,14 +1,16 @@
 import { faBars, faSearch } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Fragment, useEffect, useState } from "react"
-import { Link, useLocation } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import { ITaxonomy } from "../model/anecdote"
 import agent from "../api/agent"
 
 const NavBar = () => {
 	const [bands, setBands] = useState<ITaxonomy[]>([])
 	const [persons, setPersons] = useState<ITaxonomy[]>([])
+	const [search, setSearch] = useState('')
 	const location = useLocation();
+	const navigate = useNavigate()
 
 
 	useEffect(() => {
@@ -24,6 +26,16 @@ const NavBar = () => {
 
 		return size
 	}
+
+	const handleClick = () => {
+		navigate(`/search/${search}`)
+	}
+
+	const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+		if (e.key === "Enter") {
+			handleClick()
+		}
+	};
 
 	return (
 		<header>
@@ -66,9 +78,8 @@ const NavBar = () => {
 			<div className="search-toggle">
 				<FontAwesomeIcon icon={faSearch} />
 				<div className="search-form">
-					<input type="text" name="s" placeholder="Olaylarda ara..." />
-					<input type="hidden" name="post_type" value="olay" />
-					<button>Ara</button>
+					<input type="text" name="s" placeholder="Olaylarda ara..." value={search} onChange={e => setSearch(e.target.value)} onKeyDown={handleKeyDown} />
+					<button onClick={handleClick}>Ara</button>
 				</div>
 			</div>
 		</header>

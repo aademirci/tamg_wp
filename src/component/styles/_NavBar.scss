@@ -40,6 +40,6 @@ header { background: #363430; color: #F2EEDD; height: 50px; display: flex; justi
 				&:hover ul { height: auto; opacity: 1; }
 			}
 		}
-		.search-form { width: 200px; }
-	} 
+	}
+	header .search-form { width: 200px; }
 }
