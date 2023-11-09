@@ -8,7 +8,7 @@ import AnecdoteNav from "../component/AnecdoteNav"
 import ScrollContainer from "react-indiana-drag-scroll"
 import AnecdoteInfo from "../component/AnecdoteInfo"
 import Anecdote from "../component/Anecdote"
-import { resetPerson, setAvatar, setPerson } from "../state/anecdote/taxonomySlice"
+import { resetTaxonomy, setAvatar, setPerson } from "../state/anecdote/taxonomySlice"
 import { useInfinite } from "../hooks/useInfinite"
 import { format } from "date-fns"
 import { tr } from "date-fns/locale"
@@ -57,7 +57,7 @@ const Person: React.FC = () => {
         }
 
         return () => {
-            dispatch(resetPerson())
+            dispatch(resetTaxonomy())
         }
         
     }, [page, slug, dispatch])

@@ -20,6 +20,8 @@ const Anecdotes = {
     },
     listByBand: (id: number, page: number): Promise<IAnecdote[]> => requests.get(`/olay?gruplar=${id}&page=${page}`),
     listByPerson: (id: number, page: number): Promise<IAnecdote[]> => requests.get(`/olay?kisiler=${id}&page=${page}`),
+    listByMedium: (id: number, page: number): Promise<IAnecdote[]> => requests.get(`/olay?ortamlar=${id}&page=${page}`),
+    listByCity: (id: number, page: number): Promise<IAnecdote[]> => requests.get(`/olay?sehirler=${id}&page=${page}`),
     selected: (slug: string) => requests.get(`/olay?slug=${slug}`),
     getYears: (): Promise<IYears[]> => requests.get('/olay/archives')
 }
@@ -30,7 +32,9 @@ const AnecdotesHeaders = {
         else return requests.getHeaders(`/olay?&before=${year}-12-31T23:59:59&after=${year}-01-01T00:00:00&order=asc`)
     },
     listByBand: (id: number) => requests.getHeaders(`/olay?gruplar=${id}`),
-    listByPerson: (id: number) => requests.getHeaders(`/olay?kisiler=${id}`)
+    listByPerson: (id: number) => requests.getHeaders(`/olay?kisiler=${id}`),
+    listByMedium: (id: number) => requests.getHeaders(`/olay?ortamlar=${id}`),
+    listByCity: (id: number) => requests.getHeaders(`/olay?sehirler=${id}`)
 }
 
 const Media = {
@@ -42,7 +46,9 @@ const Taxonomies = {
     listBands: (): Promise<ITaxonomy[]> => requests.get('gruplar?order=desc&orderby=count&per_page=20'),
     listPersons: (): Promise<ITaxonomy[]> => requests.get('kisiler?order=desc&orderby=count&per_page=20'),
     findBand: (slug: string): Promise<ITaxonomy[]> => requests.get(`gruplar?slug=${slug}`),
-    findPerson: (slug: string): Promise<ITaxonomy[]> => requests.get(`kisiler?slug=${slug}`)
+    findPerson: (slug: string): Promise<ITaxonomy[]> => requests.get(`kisiler?slug=${slug}`),
+    findMedium: (slug: string): Promise<ITaxonomy[]> => requests.get(`ortamlar?slug=${slug}`),
+    findCity: (slug: string): Promise<ITaxonomy[]> => requests.get(`sehirler?slug=${slug}`)
 }
 
 export default { Anecdotes, AnecdotesHeaders, Media, Taxonomies }

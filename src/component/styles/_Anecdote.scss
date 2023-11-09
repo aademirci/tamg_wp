@@ -4,11 +4,13 @@ body.modal-open .main-section { overflow: hidden; }
 .anecdote { width: 100%; height: calc(100vh - 135px); background: #F2EEDD; border: 1px solid #C19144; overflow-y: auto; display: inline-block; margin-right: 20px; white-space: normal; vertical-align: top; box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.2); 
     .flexcontainer { display: flex; flex-direction: column; height: 100%; margin: 0; }
 }
-.anecdote.info { border: dashed 5px #C19144; height: calc(100vh - 142px); box-shadow: none; background: transparent;
-	p { padding: 20px; text-align: center; font-size: 32px; color: #AF843F; }
+.anecdote.info { border: dashed 5px #C19144; height: calc(100vh - 182px); box-shadow: none; background: transparent; color: #AF843F; padding: 20px; text-align: center;
+	h1 { font-size: 32px; }
+	p { font-size: 32px; }
+	p.description { font-size: 24px; }
 }
 .single .anecdote { height: calc(100vh - 90px); 
-	&.info { height: calc(100vh - 100px); }
+	&.info { height: calc(100vh - 140px); }
 }
 
 .main-image { position: relative;

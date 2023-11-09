@@ -8,7 +8,7 @@ import AnecdoteNav from "../component/AnecdoteNav"
 import ScrollContainer from "react-indiana-drag-scroll"
 import AnecdoteInfo from "../component/AnecdoteInfo"
 import Anecdote from "../component/Anecdote"
-import { resetBand, setAvatar, setBand } from "../state/anecdote/taxonomySlice"
+import { resetTaxonomy, setAvatar, setBand } from "../state/anecdote/taxonomySlice"
 import { useInfinite } from "../hooks/useInfinite"
 import parse from "html-react-parser"
 import Loading from "../component/Loading"
@@ -52,7 +52,7 @@ const Band: React.FC = () => {
         }
 
         return () => {
-            dispatch(resetBand())
+            dispatch(resetTaxonomy())
         }
         
     }, [page, slug, dispatch])

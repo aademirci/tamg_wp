@@ -8,6 +8,8 @@ import Band from './page/Band'
 import 'normalize.css'
 import './style.scss'
 import Person from './page/Person'
+import Medium from './page/Medium'
+import City from './page/City'
 
 function App() {
 
@@ -24,6 +26,8 @@ function App() {
         <Route path='/olay/:slug' element={<SingleAnecdote />} />
         <Route path='/grup/:slug' element={<Band />} />
         <Route path='/kisi/:slug' element={<Person />} />
+        <Route path='/ortam/:slug' element={<Medium />} />
+        <Route path='/sehir/:slug' element={<City />} />
       </Route>
     </Routes>
   )

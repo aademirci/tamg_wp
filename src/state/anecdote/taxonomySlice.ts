@@ -6,12 +6,16 @@ interface TaxonomyState {
     person: ITaxonomy | null
     band: ITaxonomy | null
     avatar: IMedia | null
+    medium: ITaxonomy | null
+    city: ITaxonomy | null
 }
 
 const initialState: TaxonomyState = {
     person: null,
     band: null,
-    avatar: null
+    avatar: null,
+    medium: null,
+    city: null
 }
 
 const taxonomySlice = createSlice({
@@ -27,17 +31,22 @@ const taxonomySlice = createSlice({
         setAvatar: (state, { payload }: PayloadAction<IMedia>) => {
             state.avatar = payload
         },
-        resetPerson: (state) => {
+        setMedium: (state, { payload }: PayloadAction<ITaxonomy>) => {
+            state.medium = payload
+        },
+        setCity: (state, { payload }: PayloadAction<ITaxonomy>) => {
+            state.city = payload
+        },
+        resetTaxonomy: (state) => {
+            state.band = null
             state.person = null
             state.avatar = null
-        },
-        resetBand: (state) => {
-            state.band = null
-            state.avatar = null
-        },
+            state.medium = null
+            state.city = null
+        }
     }
 })
 
-export const { setBand, setPerson, setAvatar, resetBand, resetPerson } = taxonomySlice.actions
+export const { setBand, setPerson, setAvatar, setMedium, setCity, resetTaxonomy } = taxonomySlice.actions
 
 export default taxonomySlice.reducer
