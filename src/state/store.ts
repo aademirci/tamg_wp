@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit"
 import anecdoteReducer from "./anecdote/anecdoteSlice"
 import taxonomyReducer from "./anecdote/taxonomySlice"
+import commentReducer from "./anecdote/commentSlice"
 
 export const store = configureStore({
   reducer: {
     anecdote: anecdoteReducer,
-    taxonomy: taxonomyReducer
+    taxonomy: taxonomyReducer,
+    comment: commentReducer
   },
 })
 

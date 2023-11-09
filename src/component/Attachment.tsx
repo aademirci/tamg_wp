@@ -4,6 +4,7 @@ import parse from "html-react-parser"
 import Modal from "./Modal"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCircleArrowLeft, faCircleArrowRight } from "@fortawesome/free-solid-svg-icons"
+import Comments from "./Comments"
 
 interface IProps {
     attachedMedia: IMedia
@@ -72,6 +73,7 @@ const Attachment: React.FC<IProps> = ({ attachedMedia, gallery, featured }) => {
                     <div className="wrapper">
                         {gallery[index].title.rendered && <h3>{parse(gallery[index].title.rendered)}</h3>}
                         {gallery[index].description.rendered.includes('<p>') && parse(gallery[index].description.rendered)}
+                        <Comments anecdoteId={gallery[index].id} isModal />
                     </div>
                     <button className="button left" style={disabledPrev ? {display: "none"} : {display: "block"}} onClick={handlePrev}>
                         <FontAwesomeIcon icon={faCircleArrowLeft} />

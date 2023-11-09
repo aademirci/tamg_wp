@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from "axios"
 import { IAnecdote, ITaxonomy, IYears } from "../model/anecdote"
 import { IMedia } from "../model/media"
+import { IComment } from "../model/comment"
 
 axios.defaults.baseURL = "https://turkiyedeagirmuzigingecmisi.com/wp-json/wp/v2/"
 
@@ -51,4 +52,8 @@ const Taxonomies = {
     findCity: (slug: string): Promise<ITaxonomy[]> => requests.get(`sehirler?slug=${slug}`)
 }
 
-export default { Anecdotes, AnecdotesHeaders, Media, Taxonomies }
+const Comments = {
+    list: (id: number): Promise<IComment[]> => requests.get(`/comments?post=${id}`)
+}
+
+export default { Anecdotes, AnecdotesHeaders, Media, Taxonomies, Comments }

@@ -5,6 +5,7 @@ import ScrollContainer from 'react-indiana-drag-scroll'
 import { IAnecdote } from '../model/anecdote'
 import Anecdote from '../component/Anecdote'
 import AnecdoteInfo from '../component/AnecdoteInfo'
+import Comments from '../component/Comments'
 
 type IParams = {
   slug: string
@@ -46,6 +47,7 @@ const SingleAnecdote: React.FC = () => {
     <Fragment>
 		<ScrollContainer className="main-section scroll-container" component={'section'} ignoreElements=".tamgModal">
 			{anecdote && <Anecdote anecdote={anecdote} />}
+			{anecdote && <Comments anecdoteId={anecdote.id} />}
 			{anecdote && anecdote.next_five.length ? <AnecdoteInfo id="anecdote-start"><p>Sonraki 5'li</p></AnecdoteInfo> : <Fragment />}
 			{anecdotes && anecdotes.map((anecdote) => <Anecdote key={anecdote.slug} anecdote={anecdote} />)}
 			{anecdotes && anecdotes.length ? <AnecdoteInfo id="anecdote-end"><p>Bu sıra bitti.</p></AnecdoteInfo> : <Fragment />}
