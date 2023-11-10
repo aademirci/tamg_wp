@@ -25,6 +25,7 @@ const Band: React.FC = () => {
     const { anecdotes, loading, page } = useSelector((state:RootState) => state.anecdote)
     const { band, avatar } = useSelector((state:RootState) => state.taxonomy)
     const infiniteScroll = useInfinite()
+    const isMobile = navigator.userAgent.indexOf("iPhone") != -1
 
     useEffect(() => {
         const setup = () => {
@@ -69,7 +70,7 @@ const Band: React.FC = () => {
 			{loading && <Loading />}
 			<AnecdoteNav />
 			<ScrollContainer className="main-section scroll-container" onEndScroll={infiniteScroll} component={'section'} ignoreElements=".tamgModal">
-                <div id="band" className="anecdote">
+                <div id="band" className="anecdote" style={isMobile ? {height: 'calc(100vh - 212px)'} : {}}>
                     {avatar &&
                     <div className="main-image">
                         <img src={avatar?.media_details.sizes.medium.source_url} />

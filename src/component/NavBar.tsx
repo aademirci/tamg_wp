@@ -9,8 +9,9 @@ const NavBar = () => {
 	const [bands, setBands] = useState<ITaxonomy[]>([])
 	const [persons, setPersons] = useState<ITaxonomy[]>([])
 	const [search, setSearch] = useState('')
-	const location = useLocation();
+	const location = useLocation()
 	const navigate = useNavigate()
+	const isMobile = navigator.userAgent.indexOf("iPhone") != -1
 
 
 	useEffect(() => {
@@ -46,7 +47,7 @@ const NavBar = () => {
 				<div className="menu-toggle">
 					<FontAwesomeIcon icon={faBars} />
 				
-					<ul id="nav-menu">
+					<ul id="nav-menu" style={isMobile ? {height: 'calc(100vh - 172px)'} : {}}>
 						<li><Link to={'#'}>Hakkında</Link></li>
 						{location.pathname === '/olay' ? 
 						<Fragment></Fragment> : <li><Link to={'/olay'}>Tüm Olaylar</Link></li>}

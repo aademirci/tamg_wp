@@ -14,6 +14,7 @@ interface IProps {
 const Comments: React.FC<IProps> = ({ anecdoteId, isModal }) => {
     const dispatch = useDispatch()
     const { comments, modalComments, loading } = useSelector((state: RootState) => state.comment)
+    const isMobile = navigator.userAgent.indexOf("iPhone") != -1
 
     useEffect(() => {
         const setup = () => {
@@ -35,7 +36,7 @@ const Comments: React.FC<IProps> = ({ anecdoteId, isModal }) => {
     return (
         <Fragment>
             {loading && <Loading />}
-            <section id="comments" className="anecdote">
+            <section id="comments" className="anecdote" style={(isMobile && !isModal) ? {height: 'calc(100vh - 170px)'} : {}}>
                 <h2 className="comments-title">
                     {isModal ? modalComments.length : comments.length} yorum var
                 </h2>

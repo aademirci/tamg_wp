@@ -11,6 +11,7 @@ import ScrollContainer from "react-indiana-drag-scroll"
 import AnecdoteInfo from "../component/AnecdoteInfo"
 import { useInfinite } from "../hooks/useInfinite"
 import Anecdote from "../component/Anecdote"
+import parse from "html-react-parser"
 
 type IParams = {
     slug: string
@@ -62,7 +63,7 @@ const Medium: React.FC = () => {
             <ScrollContainer className="main-section scroll-container" onEndScroll={infiniteScroll} component={'section'} ignoreElements=".tamgModal">
                 <AnecdoteInfo id="anecdote-start">
                     <h1>{medium && medium.name}</h1>
-					<p className="description">{medium && medium.description}</p>
+					<p className="description">{medium && parse(medium.description)}</p>
 				</AnecdoteInfo>
                 {anecdotes.map(anecdote => (
 					<Anecdote key={anecdote.id} anecdote={anecdote} />

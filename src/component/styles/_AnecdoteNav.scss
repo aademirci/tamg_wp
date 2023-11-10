@@ -3,11 +3,13 @@
     --option-bg: white;
 }
 
-.anecdoteNav { text-align: center; font-size: 12px; }
-
-.anecdoteNav button {
-    padding: 10px 20px; border-radius: 0.1em; box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2); margin-right: 10px; 
+.anecdoteNav { text-align: center; font-size: 12px; 
+    button {
+        padding: 10px 20px; border-radius: 0.1em; box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2); margin-right: 10px; 
+    }
 }
+
+.order { display: none; }
 
 select {
     /* Reset */
@@ -24,4 +26,8 @@ select {
     &:focus { outline: none; }
     /* <option> colors */
     option { color: inherit; background-color: var(--option-bg); }
+}
+
+@media screen and (min-width: 400px) {
+    .order { display: inline; }
 }

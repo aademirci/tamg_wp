@@ -13,14 +13,18 @@ import Attachment from "./Attachment"
 const Anecdote: React.FC<{anecdote: IAnecdote}> = ({ anecdote }) => {
     const [media, setMedia] = useState<IMedia[]>([])
     const [commentsLength, setCommentsLength] = useState(0)
+    const isMobile = navigator.userAgent.indexOf("iPhone") != -1
+    const isSingle = document.body.classList.contains('single')
 
     useEffect(() => {
 		agent.Media.getAttached(anecdote.id).then((data) => setMedia(data.reverse()))
         agent.Comments.list(anecdote.id).then(data => setCommentsLength(data.length))
     }, [anecdote])
 
+
+
     return (
-        <div className="anecdote" id={anecdote?.slug}>
+        <div className="anecdote" id={anecdote?.slug} style={isMobile ? isSingle ? {height: 'calc(100vh - 170px)'} : {height: 'calc(100vh - 212px)'} : {}}>
             <div className="flexcontainer">
                 <div className="main-image">
                     {anecdote.featured_media ? media.map(mid => {
