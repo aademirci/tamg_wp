@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom"
 import agent from "../api/agent"
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "../state/store"
-import { loadAnecdotes, resetAnecdotes, setPage, startLoading } from "../state/anecdote/anecdoteSlice"
+import { loadAnecdotes, resetAnecdotes, setPage, startLoading, stopLoading } from "../state/anecdote/anecdoteSlice"
 import Loading from "../component/Loading"
 import AnecdoteNav from "../component/AnecdoteNav"
 import ScrollContainer from "react-indiana-drag-scroll"
@@ -26,12 +26,16 @@ const Search: React.FC = () => {
     useEffect(() => {
         const setup = () => {
             agent.AnecdotesHeaders.search(search!).then(headerdata => {
-                const maxPages = headerdata['x-wp-totalpages']
-                if (page <= maxPages) {
-                    dispatch(startLoading())
-                    agent.Anecdotes.search(search!, page).then(data => dispatch(loadAnecdotes(data)))
+                if (headerdata['x-wp-total'] !== "0") {
+                    const maxPages = headerdata['x-wp-totalpages']
+                    if (page <= maxPages) {
+                        dispatch(startLoading())
+                        agent.Anecdotes.search(search!, page).then(data => dispatch(loadAnecdotes(data)))
+                    }
+                    if (page >= maxPages) setEnd(true)
+                } else {
+                    dispatch(stopLoading())
                 }
-                if (page >= maxPages) setEnd(true)
             })
         }
 

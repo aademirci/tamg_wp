@@ -36,10 +36,13 @@ const anecdoteSlice = createSlice({
     },
     setPage: (state, { payload }: PayloadAction<number>) => {
       state.page = payload
+    },
+    stopLoading: (state) => {
+      state.loading = false
     }
   },
 })
 
-export const { loadAnecdotes, loadAnecdote, startLoading, resetAnecdotes, setPage } = anecdoteSlice.actions
+export const { loadAnecdotes, loadAnecdote, startLoading, stopLoading, resetAnecdotes, setPage } = anecdoteSlice.actions
 
 export default anecdoteSlice.reducer

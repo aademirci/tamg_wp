@@ -12,6 +12,7 @@ import { resetTaxonomy, setAvatar, setBand } from "../state/anecdote/taxonomySli
 import { useInfinite } from "../hooks/useInfinite"
 import parse from "html-react-parser"
 import Loading from "../component/Loading"
+import NotFound from "../component/NotFound"
 
 type IParams = {
     slug: string
@@ -19,6 +20,7 @@ type IParams = {
 
 const Band: React.FC = () => {
     const [end, setEnd] = useState(false)
+    const [error, setError] = useState(false)
     const { slug } = useParams<IParams>()
     const dispatch = useDispatch()
     const newSlug = useRef<string | undefined>("")
@@ -30,15 +32,19 @@ const Band: React.FC = () => {
     useEffect(() => {
         const setup = () => {
             agent.Taxonomies.findBand(slug!).then((data) => {
-                dispatch(setBand(data[0]))
-                agent.AnecdotesHeaders.listByBand(data[0].id).then((headerData) => {
-                    const maxPages = headerData['x-wp-totalpages']
-                    if (page <= maxPages) {
-                        dispatch(startLoading())
-                        agent.Anecdotes.listByBand(data[0].id, page).then((data) => dispatch(loadAnecdotes(data)))
-                    }
-                    if (page >= maxPages) setEnd(true)
-                })
+                if (data.length) {
+                    dispatch(setBand(data[0]))
+                    agent.AnecdotesHeaders.listByBand(data[0].id).then((headerData) => {
+                        const maxPages = headerData['x-wp-totalpages']
+                        if (page <= maxPages) {
+                            dispatch(startLoading())
+                            agent.Anecdotes.listByBand(data[0].id, page).then((data) => dispatch(loadAnecdotes(data)))
+                        }
+                        if (page >= maxPages) setEnd(true)
+                    })
+                } else {
+                    setError(true)
+                }
             })
         }
         
@@ -64,6 +70,8 @@ const Band: React.FC = () => {
             if (band.acf.avatar) agent.Media.getMedia(band.acf.avatar).then((data) => dispatch(setAvatar(data!)))
         }
     }, [band, dispatch])
+
+    if (error) return <NotFound type="grup" />
 
     return (
         <Fragment>

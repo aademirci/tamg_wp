@@ -12,6 +12,7 @@ import ScrollContainer from "react-indiana-drag-scroll"
 import AnecdoteInfo from "../component/AnecdoteInfo"
 import Anecdote from "../component/Anecdote"
 import parse from "html-react-parser"
+import NotFound from "../component/NotFound"
 
 type IParams = {
     slug: string
@@ -19,6 +20,7 @@ type IParams = {
 
 const City: React.FC = () => {
     const [end, setEnd] = useState(false)
+    const [error, setError] = useState(false)
     const { slug } = useParams<IParams>()
     const dispatch = useDispatch()
     const newSlug = useRef<string | undefined>("")
@@ -29,15 +31,19 @@ const City: React.FC = () => {
     useEffect(() => {
         const setup = () => {
             agent.Taxonomies.findCity(slug!).then((data) => {
-                dispatch(setCity(data[0]))
-                agent.AnecdotesHeaders.listByCity(data[0].id).then((headerData) => {
-                    const maxPages = headerData['x-wp-totalpages']
-                    if (page <= maxPages) {
-                        dispatch(startLoading())
-                        agent.Anecdotes.listByCity(data[0].id, page).then((data) => dispatch(loadAnecdotes(data)))
-                    }
-                    if (page >= maxPages) setEnd(true)
-                })
+                if (data.length) {
+                    dispatch(setCity(data[0]))
+                    agent.AnecdotesHeaders.listByCity(data[0].id).then((headerData) => {
+                        const maxPages = headerData['x-wp-totalpages']
+                        if (page <= maxPages) {
+                            dispatch(startLoading())
+                            agent.Anecdotes.listByCity(data[0].id, page).then((data) => dispatch(loadAnecdotes(data)))
+                        }
+                        if (page >= maxPages) setEnd(true)
+                    })
+                } else {
+                    setError(true)
+                }
             })
 		}
 
@@ -55,6 +61,8 @@ const City: React.FC = () => {
             dispatch(resetTaxonomy())
         }
     }, [page, slug, dispatch])
+
+    if (error) return <NotFound type="şehir" />
     
     return (
         <Fragment>

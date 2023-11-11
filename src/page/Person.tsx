@@ -15,6 +15,7 @@ import { tr } from "date-fns/locale"
 import { useDate } from "../hooks/useDate"
 import parse from "html-react-parser"
 import Loading from "../component/Loading"
+import NotFound from "../component/NotFound"
 
 type IParams = {
     slug: string
@@ -22,6 +23,7 @@ type IParams = {
 
 const Person: React.FC = () => {
     const [end, setEnd] = useState(false)
+    const [error, setError] = useState(false)
     const { slug } = useParams<IParams>()
     const dispatch = useDispatch()
     const newSlug = useRef<string | undefined>("")
@@ -34,6 +36,7 @@ const Person: React.FC = () => {
     useEffect(() => {
         const setup = () => {
             agent.Taxonomies.findPerson(slug!).then((data) => {
+                if (data.length) {
                 dispatch(setPerson(data[0]))
                 agent.AnecdotesHeaders.listByPerson(data[0].id).then((headerData) => {
                     const maxPages = headerData['x-wp-totalpages']
@@ -43,6 +46,9 @@ const Person: React.FC = () => {
                     }
                     if (page >= maxPages) setEnd(true)
                 })
+                } else {
+                    setError(true)
+                }
             })
         }
         
@@ -70,6 +76,7 @@ const Person: React.FC = () => {
         }
     }, [person, dispatch])
 
+    if (error) return <NotFound type="kişi" />
 
     return (
         <Fragment>
