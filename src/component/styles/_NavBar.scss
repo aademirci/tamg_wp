@@ -3,7 +3,7 @@ header { background: #363430; color: #F2EEDD; height: 50px; display: flex; justi
 		#nav-menu { margin: 0; font-family: 'gill-sans-nova'; background-color: #363430; transition: .2s; position: absolute; top: 50px; left: -540px; width: calc(100% - 96px); max-height: calc(100vh - 90px); padding: 20px 36px; overflow-y: auto;
 			li { list-style: none; font-size: 24px; line-height: 1.5; }
 			.band-toggle, .person-toggle { position: relative;
-				ul { margin-bottom: 20px; padding-left: 30px; margin-right: 0;
+				ul { margin-bottom: 20px; padding-left: 30px; margin-right: 0; 
 					li { display: inline-block; padding-right: 18px; }
 				}
 			}
@@ -31,7 +31,7 @@ header { background: #363430; color: #F2EEDD; height: 50px; display: flex; justi
 				&:hover { background-color: #4F4D48; }
 			}
 			.band-toggle, .person-toggle { cursor: pointer;
-				ul { overflow: hidden; height: 0; opacity: 0; position: absolute; transition: .2s; width: 480px; padding: 0; left: 0; background: #363430; 
+				ul { overflow: hidden; height: 0; opacity: 0; position: absolute; transition: .2s; width: 480px; padding: 0; left: 0; background: #363430; line-height: 1;
 					li { line-height: 1; height: auto; padding: 0;
 						a { padding: 12px; }
 					}
@@ -41,4 +41,12 @@ header { background: #363430; color: #F2EEDD; height: 50px; display: flex; justi
 		}
 	}
 	header .search-form { width: 200px; }
+}
+
+@media screen and (min-width: 560px) and (max-width: 915px) {
+	header .main-menu #nav-menu .person-toggle ul { left: auto; right: 0; width: 370px; }
+}
+
+@media screen and (min-width: 560px) and (max-width: 835px) {
+	header .main-menu #nav-menu .band-toggle ul { left: auto; right: 0; width: 300px; }
 }

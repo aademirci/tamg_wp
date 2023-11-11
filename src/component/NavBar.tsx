@@ -79,8 +79,8 @@ const NavBar = () => {
 			<div className="search-toggle">
 				<FontAwesomeIcon icon={faSearch} />
 				<div className="search-form">
-					<input type="text" name="s" placeholder="Olaylarda ara..." value={search} onChange={e => setSearch(e.target.value)} onKeyDown={handleKeyDown} />
-					<button onClick={handleClick}>Ara</button>
+					<input type="text" name="s" placeholder="Olaylarda ara..." value={search} onChange={e => setSearch(e.target.value)} onKeyDown={search ? handleKeyDown : undefined} />
+					<button onClick={search ? handleClick : undefined}>Ara</button>
 				</div>
 			</div>
 		</header>
