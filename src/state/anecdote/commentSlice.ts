@@ -5,12 +5,14 @@ interface CommentState {
     comments: IComment[]
     modalComments: IComment[]
     loading: boolean
+    updated: boolean
 }
 
 const initialState: CommentState = {
     comments: [],
     modalComments: [],
-    loading: true
+    loading: true,
+    updated: false
 }
 
 const commentSlice = createSlice({
@@ -23,18 +25,23 @@ const commentSlice = createSlice({
         loadComments: (state, { payload }: PayloadAction<IComment[]>) => {
             state.comments = payload
             state.loading = false
+            state.updated = false
         },
         loadModalComments: (state, { payload }: PayloadAction<IComment[]>) => {
             state.modalComments = payload
             state.loading = false
+            state.updated = false
         },
         resetComments: (state) => {
             state.comments = []
             state.modalComments = []
+        },
+        updateComments: (state) => {
+            state.updated = true
         }
     }
 })
 
-export const { startLoading, loadComments, loadModalComments, resetComments } = commentSlice.actions
+export const { startLoading, loadComments, loadModalComments, resetComments, updateComments } = commentSlice.actions
 
 export default commentSlice.reducer

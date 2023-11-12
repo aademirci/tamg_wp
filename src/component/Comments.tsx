@@ -5,6 +5,7 @@ import agent from "../api/agent"
 import { loadComments, loadModalComments, resetComments, startLoading } from "../state/anecdote/commentSlice"
 import Loading from "./Loading"
 import Comment from "./Comment"
+import CommentForm from "./CommentForm"
 
 interface IProps {
     anecdoteId: number
@@ -13,7 +14,7 @@ interface IProps {
 
 const Comments: React.FC<IProps> = ({ anecdoteId, isModal }) => {
     const dispatch = useDispatch()
-    const { comments, modalComments, loading } = useSelector((state: RootState) => state.comment)
+    const { comments, modalComments, loading, updated } = useSelector((state: RootState) => state.comment)
     const isMobile = navigator.userAgent.indexOf("iPhone") != -1
 
     useEffect(() => {
@@ -31,12 +32,13 @@ const Comments: React.FC<IProps> = ({ anecdoteId, isModal }) => {
             if(!isModal) dispatch(resetComments())
         }
         
-    }, [dispatch, anecdoteId, isModal])
+    }, [dispatch, anecdoteId, isModal, updated])
 
     return (
         <Fragment>
             {loading && <Loading />}
             <section id="comments" className="anecdote" style={(isMobile && !isModal) ? {height: 'calc(100vh - 170px)'} : {}}>
+                <CommentForm anecdoteId={anecdoteId} />
                 <h2 className="comments-title">
                     {isModal ? modalComments.length : comments.length} yorum var
                 </h2>

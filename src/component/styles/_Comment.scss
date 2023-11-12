@@ -16,9 +16,15 @@
     
 }
 
-#respond { margin-bottom: 20px; 
-    .form-submit { text-align: right; }
-    input { width: 100%; border: 1px solid #D9A74A; padding: 10px; margin-bottom: 1px; }
+#respond { margin-bottom: 20px; padding: 20px;
+    h2 { padding: 0; }
+    .form-submit { text-align: right; margin: 0; 
+        input { width: 100%; }
+    }
+    input { width: calc(100% - 22px); border: 1px solid #D9A74A; padding: 10px; margin-bottom: 1px; font-size: 12px; }
+    textarea { width: calc(100% - 22px); font-size: 12px; }
+    .status-good { color: green; }
+    .status-bad { color: red; }
 }
 
 #comment { width: 100%; border: 1px solid #D9A74A; padding: 10px; border-radius: 3px; }
@@ -40,5 +46,5 @@
         }
         
     }
-    #respond { margin-top: 20px; }
+    #respond { margin-top: 20px; padding: 0; }
 }

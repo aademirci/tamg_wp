@@ -52,7 +52,7 @@ const SingleAnecdote: React.FC = () => {
 
 	return (
 		<Fragment>
-			<ScrollContainer className="main-section scroll-container" component={'section'} ignoreElements=".tamgModal">
+			<ScrollContainer className="main-section scroll-container" component={'section'} ignoreElements=".tamgModal, #respond form">
 				{anecdote && <Anecdote anecdote={anecdote} />}
 				{anecdote && <Comments anecdoteId={anecdote.id} />}
 				{anecdote && anecdote.next_five.length ? <AnecdoteInfo id="anecdote-start"><p>Sonraki 5'li</p></AnecdoteInfo> : <Fragment />}

@@ -10,8 +10,8 @@ const responseHeader = (response: AxiosResponse) => response.headers
 
 const requests = { 
     get: (url: string) => axios.get(url).then(responseBody),
-    getHeaders: (url: string) => axios.get(url).then(responseHeader)
-
+    getHeaders: (url: string) => axios.get(url).then(responseHeader),
+    post: (url: string, data: string) => axios.post(url, data, { headers: { 'Content-Type': 'application/json' } })
 }
 
 const Anecdotes = {
@@ -55,7 +55,8 @@ const Taxonomies = {
 }
 
 const Comments = {
-    list: (id: number): Promise<IComment[]> => requests.get(`/comments?post=${id}`)
+    list: (id: number): Promise<IComment[]> => requests.get(`/comments?post=${id}`),
+    post: (data: string) => requests.post('/comments', data)
 }
 
 export default { Anecdotes, AnecdotesHeaders, Media, Taxonomies, Comments }
