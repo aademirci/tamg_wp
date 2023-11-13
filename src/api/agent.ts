@@ -59,4 +59,8 @@ const Comments = {
     post: (data: string) => requests.post('/comments', data)
 }
 
-export default { Anecdotes, AnecdotesHeaders, Media, Taxonomies, Comments }
+const Pages = {
+    selected: (slug: string) => requests.get(`pages?slug=${slug}`)
+}
+
+export default { Anecdotes, AnecdotesHeaders, Media, Taxonomies, Comments, Pages }

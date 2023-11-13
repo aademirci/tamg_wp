@@ -12,12 +12,14 @@ import Medium from './page/Medium'
 import City from './page/City'
 import Search from './page/Search'
 import NotFound from './component/NotFound'
+import Page from './page/Page'
 
 function App() {
 
   return (
     <Routes>
       <Route path='/' element={<Homepage />} />
+      <Route path='/:slug' element={<Page />} />
       <Route element={
         <Fragment>
           <NavBar />

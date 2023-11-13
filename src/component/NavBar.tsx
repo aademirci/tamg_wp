@@ -48,7 +48,7 @@ const NavBar = () => {
 					<FontAwesomeIcon icon={faBars} />
 				
 					<ul id="nav-menu" style={isMobile ? {height: 'calc(100vh - 172px)'} : {}}>
-						<li><Link to={'#'}>Hakkında</Link></li>
+						<li><Link to={'/hakkinda'}>Hakkında</Link></li>
 						{location.pathname === '/olay' ? 
 						<Fragment></Fragment> : <li><Link to={'/olay'}>Tüm Olaylar</Link></li>}
 						<li className="band-toggle">Gruplar
