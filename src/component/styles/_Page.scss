@@ -1,3 +1,5 @@
+.single-page { overflow: auto; }
+
 .content-area.page { padding: 20px; 
     h1 { font-size: 36px; margin-top: 0;}
     p { font-size: 18px; 
@@ -7,7 +9,7 @@
 
     article { background: #F2EEDD; border: 1px solid #C19144; padding: 20px; }
     .alignright { margin-inline: auto;
-        img { margin-inline: auto; display: block;}
+        img { margin-inline: auto; display: block; }
     }
 }
 

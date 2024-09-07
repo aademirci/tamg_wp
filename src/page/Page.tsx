@@ -16,10 +16,15 @@ const Page: React.FC = () => {
 
     useEffect(() => {
         if (page) document.title = `${page.title.rendered} - Türkiye'de Ağır Müziğin Geçmişi`
+        document.body.classList.add('single-page')
         agent.Pages.selected(slug!).then((data) => {
             if(data.length) setPage(data[0])
             else setError(true)
         })
+
+        return () => {
+            document.body.classList.remove('single-page')
+        }
     }, [slug, page])
 
     if (error) return <NotFound type="sayfa" />
