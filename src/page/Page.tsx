@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import agent from "../api/agent"
 import { IPage } from "../model/page"
@@ -24,10 +24,13 @@ const Page: React.FC = () => {
     if (error) return <NotFound type="sayfa" />
 
     return (
-        <Fragment>
-            <h1>{page && parse(page.title.rendered)}</h1>
-            <div>{page && parse(page.content.rendered)}</div>
-        </Fragment>
+        <div className="content-area page">
+            <article>
+                <h1>{page && parse(page.title.rendered)}</h1>
+                <div>{page && parse(page.content.rendered)}</div>
+            </article>
+        </div>
+        
     )
 }
 

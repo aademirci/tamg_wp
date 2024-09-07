@@ -19,13 +19,13 @@ function App() {
   return (
     <Routes>
       <Route path='/' element={<Homepage />} />
-      <Route path='/:slug' element={<Page />} />
       <Route element={
         <Fragment>
           <NavBar />
           <Outlet />
         </Fragment>
       }>
+        <Route path='/:slug' element={<Page />} />
         <Route path='/olay' element={<Anecdotes />} />
         <Route path='/olay/:slug' element={<SingleAnecdote />} />
         <Route path='/grup/:slug' element={<Band />} />

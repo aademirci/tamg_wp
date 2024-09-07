@@ -1,0 +1,33 @@
+.brand {  color: #363430; padding: 20px;
+    #heading { font-family: "gill-sans-nova"; line-height: 1; margin-top: 0; margin-bottom: 15px; background-color: #363430; color: #F2EEDD; display: flex; align-items: center; font-size: 48px;
+        .line2 { font-weight: bold; }
+        img { width: 150px; margin-right: 20px; }
+    }
+    p { font-size: 16px; margin-bottom: 20px; line-height: 1.5 }
+    a { display: block; border-radius: 4px; padding: 12px; line-height: 1; background: #F2EEDD; color: #363430; font-size: 16px; margin-top: 10px;
+        &:hover { background: #F2EEDD; }
+    }
+    a.action { background: #363430; color: #F2EEDD;
+        &:hover { background: #C19144; } 
+    }
+}
+
+@media screen and (min-width: 960px) {
+    .brand { flex: 1 1 auto; padding: 36px; position: relative;
+        #heading { font-size: 72px; margin-bottom: 36px; 
+            img { width: 200px;  }
+        }
+        p { font-size: 24px; margin-bottom: 36px; line-height: 1.25 }
+        a { display: inline-block; padding: 12px; line-height: 1; font-size: 16px; margin-right: 16px; }
+    }
+}
+
+@media screen and (min-width: 1366px){
+    .brand { max-width: 1366px; margin-inline: auto;
+        #heading { margin-bottom: 36px; font-size: 120px;
+            img { width: 300px; }
+        }
+        p { font-size: 36px; margin-bottom: 36px; }
+        a { padding: 12px; line-height: 1; font-size: 36px; margin-right: 36px; margin-top: 36px; margin-bottom: 0; } 
+    }
+}    
