@@ -71,7 +71,7 @@ const Person: React.FC = () => {
 
     useEffect(() => {
         if (person) {
-            document.title = person.name + " - Türkiye'de Ağır Müziğin Geçmişi"
+            document.title = `${person.name} - Türkiye'de Ağır Müziğin Geçmişi`
             if (person.acf.avatar) agent.Media.getMedia(person.acf.avatar).then((data) => dispatch(setAvatar(data!)))
         }
     }, [person, dispatch])

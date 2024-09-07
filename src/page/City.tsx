@@ -62,6 +62,12 @@ const City: React.FC = () => {
         }
     }, [page, slug, dispatch])
 
+    useEffect(() => {
+        if (city) {
+            document.title = `${city.name} - Türkiye'de Ağır Müziğin Geçmişi`
+        }
+    }, [city])
+
     if (error) return <NotFound type="şehir" />
     
     return (

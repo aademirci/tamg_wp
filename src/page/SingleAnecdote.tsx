@@ -43,7 +43,7 @@ const SingleAnecdote: React.FC = () => {
 		}
 
 		if (anecdote) {
-			document.title = anecdote.title.rendered + " - Türkiye'de Ağır Müziğin Geçmişi"
+			document.title = `${anecdote.title.rendered} - Türkiye'de Ağır Müziğin Geçmişi`
 			loadNextFive(anecdote.next_five).then((data) => setAnecdotes(data))
 		}
 	}, [anecdote])

@@ -15,11 +15,12 @@ const Page: React.FC = () => {
     const [error, setError] = useState(false)
 
     useEffect(() => {
+        if (page) document.title = `${page.title.rendered} - Türkiye'de Ağır Müziğin Geçmişi`
         agent.Pages.selected(slug!).then((data) => {
             if(data.length) setPage(data[0])
             else setError(true)
         })
-    }, [slug])
+    }, [slug, page])
 
     if (error) return <NotFound type="sayfa" />
 

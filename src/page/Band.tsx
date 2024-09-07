@@ -66,7 +66,7 @@ const Band: React.FC = () => {
 
     useEffect(() => {
         if (band) {
-            document.title = band.name + " - Türkiye'de Ağır Müziğin Geçmişi"
+            document.title = `${band.name} - Türkiye'de Ağır Müziğin Geçmişi`
             if (band.acf.avatar) agent.Media.getMedia(band.acf.avatar).then((data) => dispatch(setAvatar(data!)))
         }
     }, [band, dispatch])

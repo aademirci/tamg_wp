@@ -24,6 +24,7 @@ const Search: React.FC = () => {
     const infiniteScroll = useInfinite()
 
     useEffect(() => {
+        document.title = "Arama sonuçları - Türkiye'de Ağır Müziğin Geçmişi"
         const setup = () => {
             agent.AnecdotesHeaders.search(search!).then(headerdata => {
                 if (headerdata['x-wp-total'] !== "0") {

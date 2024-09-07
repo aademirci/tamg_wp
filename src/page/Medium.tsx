@@ -62,6 +62,12 @@ const Medium: React.FC = () => {
         }
     }, [page, slug, dispatch])
 
+    useEffect(() => {
+        if (medium) {
+            document.title = `${medium.name} - Türkiye'de Ağır Müziğin Geçmişi`
+        }
+    }, [medium])
+
     if (error) return <NotFound type="ortam ya da mekan" />
 
     return (
