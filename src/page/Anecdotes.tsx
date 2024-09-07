@@ -63,6 +63,10 @@ const Anecdotes: React.FC = () => {
 				<AnecdoteInfo id="anecdote-start">
 					<p><FontAwesomeIcon icon={faInfoCircle} /></p>
 					<p>Parmağınız veya fare imleciniz ile sağa-sola kaydırarak olaylar arasında geçiş yapabilirsiniz.</p>
+					<p>
+						Bu arada kitabımızı okudunuz mu?
+						<a href="https://destekdukkan.com/magaza/urun/turkiyede-agir-muzigin-gecmisi" target="blank" id="book"><img src="https://turkiyedeagirmuzigingecmisi.com/wp-content/themes/tamg/img/tamg-kitap.png" alt="Türkiye'de Ağır Müziğin Geçmişi kitabı" /></a>
+					</p>
 				</AnecdoteInfo>
 				{anecdotes.map(anecdote => (
 					<Anecdote key={anecdote.id} anecdote={anecdote} />

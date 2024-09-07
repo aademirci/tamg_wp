@@ -55,7 +55,10 @@ const SingleAnecdote: React.FC = () => {
 			<ScrollContainer className="main-section scroll-container" component={'section'} ignoreElements=".tamgModal, #respond form">
 				{anecdote && <Anecdote anecdote={anecdote} />}
 				{anecdote && <Comments anecdoteId={anecdote.id} />}
-				{anecdote && anecdote.next_five.length ? <AnecdoteInfo id="anecdote-start"><p>Sonraki 5'li</p></AnecdoteInfo> : <Fragment />}
+				{anecdote && anecdote.next_five.length ? <AnecdoteInfo id="anecdote-start"><p>Sonraki 5'li</p><p>
+						Bu arada kitabımızı okudunuz mu?
+						<a href="https://destekdukkan.com/magaza/urun/turkiyede-agir-muzigin-gecmisi" target="blank" id="book"><img src="https://turkiyedeagirmuzigingecmisi.com/wp-content/themes/tamg/img/tamg-kitap.png" alt="Türkiye'de Ağır Müziğin Geçmişi kitabı" /></a>
+					</p></AnecdoteInfo> : <Fragment />}
 				{anecdotes && anecdotes.map((anecdote) => <Anecdote key={anecdote.slug} anecdote={anecdote} />)}
 				{anecdotes && anecdotes.length ? <AnecdoteInfo id="anecdote-end"><p>Bu sıra bitti.</p></AnecdoteInfo> : <Fragment />}
 			</ScrollContainer>
