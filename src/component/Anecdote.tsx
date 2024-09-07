@@ -87,10 +87,10 @@ const Anecdote: React.FC<{anecdote: IAnecdote}> = ({ anecdote }) => {
                 <div className="witnesses">
                     <h6>Oradaydılar:</h6>
                     {anecdote?.olaydaki_gruplar && anecdote?.olaydaki_gruplar.map(band => (
-                        <Link key={band.slug} to={`/grup/${band.slug}`} rel="tag">{band.name}</Link>
+                        <Link key={band.slug} to={`/grup/${band.slug}`} rel="tag">{parse(band.name)}</Link>
                     ))}
                     {anecdote?.olaydaki_kisiler && anecdote?.olaydaki_kisiler.map(person => (
-                        <Link key={person.slug} to={`/kisi/${person.slug}`} rel="tag">{person.name}</Link>
+                        <Link key={person.slug} to={`/kisi/${person.slug}`} rel="tag">{parse(person.name)}</Link>
                     ))}
                 </div>
             </div>
