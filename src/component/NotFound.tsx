@@ -4,7 +4,7 @@ interface IProps {
 
 const NotFound: React.FC<IProps> = ({ type }) => {
   return (
-    <div>
+    <div className="not-found">
         {type ? `Aradığınız ${type} bulunamadı.` : "Aradığınız sayfa bulunamadı"}
     </div>
   )
